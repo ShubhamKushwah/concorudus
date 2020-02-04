@@ -16,6 +16,7 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
 
   <title>Concordus Applications</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 </head>
 
 <body>
@@ -63,7 +64,8 @@
         <div class="row m-0 p-0">
           <div class="col-md-6">
             <div style="padding-top: 200px;padding-left: 100px;">
-              <h1 class="pb-5" style="font-size: 48px;">Building a <span class="tdyellow">connected <br>world.</span>
+              <h1 style="font-size: 48px;" class="pb-5">Building a <span class="tdyellow">connected
+                  <br>world.</span>
               </h1>
               <p class="pb-5" style="font-size: 18px;width: 89%;overflow: auto;">
                 Innovative, smart and cost-effective software development and integration provided as a service, for
@@ -268,10 +270,10 @@
     <div class="row">
       <div class="col-md-7 box1">
         <p class="tex1">
-          <span id="services_text">Helpdesk Services</span>
+          <span style="display: block;" id="services_heading">Helpdesk Services</span>
           <hr class="hr_1">
         </p><br>
-        <p class="tax2">
+        <p class="tax2" id="services_text">
           Helpdesk support is often one of the most difficult jobs in any organization; having to be the
           firefighter when a computer is crashing, or a user has a deadline and their presentation won’t print. By
           utilizing 24×7 LIVE helpdesk, you can relieve your team from working nights and weekends and prevent your
@@ -283,12 +285,11 @@
         <br>
         <br><br>
         <button id="services_btn" onclick="serviceNextClicked()" class="a_2">Managed IT Services</button><br>
-        <!-- <button onclick="myFunction3()" class="a_2">NOC Services</button> -->
 
 
       </div>
 
-      <div class="col-md-5" style="background-image: url('images/Ellipse11.png'); margin-bottom: 78px;
+      <div id="services_bg" class="col-md-5" style="background-image: url('images/services_1.png'); margin-bottom: 78px;
   ">
       </div>
 
@@ -673,6 +674,20 @@
 
 
   <script>
+    function animateCSS(element, animationName, callback) {
+      const node = document.querySelector(element)
+      node.classList.add('animated', animationName)
+
+      function handleAnimationEnd() {
+        node.classList.remove('animated', animationName)
+        node.removeEventListener('animationend', handleAnimationEnd)
+
+        if (typeof callback === 'function') callback()
+      }
+
+      node.addEventListener('animationend', handleAnimationEnd)
+    }
+
     const s_headings = [
       'Helpdesk Services',
       'Managed IT Services',
@@ -681,66 +696,84 @@
 
     const s_text = [
       'Helpdesk support is often one of the most difficult jobs in any organization; having to be the firefighter when a computer is crashing, or a user has a deadline and their presentation won’t print. By utilizing 24×7 LIVE helpdesk, you can relieve your team from working nights and weekends and prevent your high-value employees from working on low-value tasks.',
-      '2Helpdesk support is often one of the most difficult jobs in any organization; having to be the firefighter when a computer is crashing, or a user has a deadline and their presentation won’t print. By utilizing 24×7 LIVE helpdesk, you can relieve your team from working nights and weekends and prevent your high-value employees from working on low-value tasks.',
-      '3Helpdesk support is often one of the most difficult jobs in any organization; having to be the firefighter when a computer is crashing, or a user has a deadline and their presentation won’t print. By utilizing 24×7 LIVE helpdesk, you can relieve your team from working nights and weekends and prevent your high-value employees from working on low-value tasks.',
+      'Our senior engineers will help you assess your systems, architect a design, develop a plan and implement a solution. We take a 360 degree look at your needs, zeroing in on risk areas while keeping the big picture in mind.',
+      'It’s 2 AM, do you know what your servers are up to? Let Concordus answer the call with a proven global service delivery model that supports your clients’ most critical needs. We offer around the clock support in managing your infrastructure.',
     ];
 
+    const s_images = [
+      'images/services_1.png',
+      'images/services_2.png',
+      'images/services_3.png',
+    ]
+
+    let current = 1;
+    let next = 2;
+
     function serviceNextClicked() {
-      const btn = document.getElementById('services_btn');
+      next = (current + 1) % 3;
+      animateCSS('#services_heading', 'slideInLeft')
+      animateCSS('#services_text', 'slideInLeft')
+      animateCSS('#services_bg', 'slideInRight')
+      animateCSS('#services_btn', 'slideInLeft')
+      $('#services_heading').text(s_headings[current])
+      $('#services_text').html(s_text[current])
+      $('#services_bg').css("background-image", `url(${s_images[current]})`)
+      $('#services_btn').html(s_headings[next])
+      current = (current + 1) % 3;
     }
 
 
-    function myFunction1() {
+    // function myFunction1() {
 
-      document.getElementById("myDIV1").style.display = "block";
+    //   document.getElementById("myDIV1").style.display = "block";
 
-      document.getElementById("myDIV2").style.display = "none";
+    //   document.getElementById("myDIV2").style.display = "none";
 
-      document.getElementById("myDIV3").style.display = "none";
+    //   document.getElementById("myDIV3").style.display = "none";
 
-      document.getElementById("id1").style.display = "none";
+    //   document.getElementById("id1").style.display = "none";
 
-      document.getElementById("id2").style.display = "block";
+    //   document.getElementById("id2").style.display = "block";
 
-      document.getElementById("id3").style.display = "none";
-
-
-    }
-
-    function myFunction2() {
-
-      document.getElementById("myDIV1").style.display = "none";
-
-      document.getElementById("myDIV2").style.display = "block";
-
-      document.getElementById("myDIV3").style.display = "none";
-
-      document.getElementById("id1").style.display = "none";
-
-      document.getElementById("id2").style.display = "none";
-
-      document.getElementById("id3").style.display = "block";
+    //   document.getElementById("id3").style.display = "none";
 
 
-    }
+    // }
 
-    function myFunction3() {
+    // function myFunction2() {
 
-      document.getElementById("myDIV1").style.display = "none";
+    //   document.getElementById("myDIV1").style.display = "none";
 
-      document.getElementById("myDIV2").style.display = "none";
+    //   document.getElementById("myDIV2").style.display = "block";
 
-      document.getElementById("myDIV2").style.display = "none";
+    //   document.getElementById("myDIV3").style.display = "none";
 
-      document.getElementById("myDIV3").style.display = "block";
+    //   document.getElementById("id1").style.display = "none";
 
-      document.getElementById("id1").style.display = "block";
+    //   document.getElementById("id2").style.display = "none";
 
-      document.getElementById("id2").style.display = "none";
+    //   document.getElementById("id3").style.display = "block";
 
-      document.getElementById("id3").style.display = "none";
 
-    }
+    // }
+
+    // function myFunction3() {
+
+    //   document.getElementById("myDIV1").style.display = "none";
+
+    //   document.getElementById("myDIV2").style.display = "none";
+
+    //   document.getElementById("myDIV2").style.display = "none";
+
+    //   document.getElementById("myDIV3").style.display = "block";
+
+    //   document.getElementById("id1").style.display = "block";
+
+    //   document.getElementById("id2").style.display = "none";
+
+    //   document.getElementById("id3").style.display = "none";
+
+    // }
   </script>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
